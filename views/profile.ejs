@@ -10,6 +10,9 @@
         .posts-width {
             width: calc(3 * 18rem + 1rem);
         }
+        .posts-width2 {
+            width: 36rem;
+        }
         .header {
             position: sticky;
             top: 0;
@@ -17,12 +20,12 @@
         }
     </style>
 </head>
-<body class="bg-zinc-900 text-white flex flex-col items-center w-full pl-10 pr-10 pb-10">
-    <div class="header flex flex-row justify-between items-center w-full mb-4 border-b border-gray-700 pb-4 pt-4 bg-zinc-900">
-        <div id="header" class="flex flex-row justify-center items-center">
+<body class="bg-zinc-900 text-white flex flex-col items-center w-full pl-10 pr-10 pb-10 gap-2">
+    <div class="header flex flex-row justify-between items-center w-full mb-4 border-b border-zinc-700 pb-4 pt-4 bg-zinc-900">
+        <a id="header" class="flex flex-row justify-center items-center hover:none" href="/p">
             <img src="/images/Binora Pre 1.svg" alt="Binora Pre" class="w-10 h-10 mr-4">
             <h1 class="text-4xl font-bold">Binora Pre</h1>
-        </div>
+        </a>
         <div class="logout flex flex-row justify-center items-center">
             <a href="/binora" class="text-white text-sm bg-green-700 hover:bg-green-600 px-3 py-2 rounded">Messages</a>
             <a href="/createpost" class="flex flex-col items-center text-sm">
@@ -31,19 +34,28 @@
             <a href="/logout" class="bg-blue-800 px-3 py-2 flex justify-center items-center rounded text-sm hover:bg-blue-900">Logout</a>
         </div>
     </div>
-    <div class="profile-top flex flex-row justify-center">
-        <div class="profile-image bg-zinc-700 w-44 h-44 rounded-full p-10 mb-7"></div>
-        <div class="details h-44 w-72 flex flex-col items-center m-4">
-            <h3 class="name"><%= user.name %></h3>
-            <h3 class="username">@<%= user.username %></h3>
-            <!-- <h3 class="posts"></h3> -->
+    <div class="head flex flex-row items-center justify-center posts-width gap-2 mb-4">
+        <div class="profile-top flex flex-row justify-center posts-width2 p-2 rounded-lg">
+            <div class="profile-image bg-zinc-700 w-20 h-20 rounded-full p-10">
+
+            </div>
+            <div class="details h-20 flex flex-col justify-center ml-10">
+                <h3 class="name font-bold"><%= user.name %></h3>
+                <h3 class="username text-zinc-500"><%= user.username %></h3>
+                <!-- <h3 class="posts"></h3> -->
+            </div>
+        </div>
+        <div class="about flex flex-col ml-10 posts-width2 p-2 rounded-lg border border-zinc-700 text-sm">
+            <h5 class="font-semibold px-3 py-2">About</h5>
+            <p class="tracking-tight font-semibold px-3 pb-2">Hi, I'm Ashish and now I'm currently working on <br> Binora Phase 1. <br>Looking for support</p>
         </div>
     </div>
-    <div class="posts posts-width h-full gap-2 flex flex-row flex-wrap ml-10 mr-10">
+
+    <div class="posts posts-width h-full gap-2 flex flex-row flex-wrap ml-10 mr-10 rounded-lg">
         <% if (user.posts.length === 0) { %>
             <div class="each-post w-72 h-72 p-2 bg-zinc-700 flex flex-col items-center justify-center">
                 <a href="/createpost" class="text-blue-400  flex flex-col items-center">
-                    <img class="p-2" src="/images/Binora Pre 1.svg">
+                    <img class="p-2 w-20 h-20" src="/images/Binora Pre 1.svg">
                     <p class="hover:underline">Create a new post</p>
                 </a>
             </div>
