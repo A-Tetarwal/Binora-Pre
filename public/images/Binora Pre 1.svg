@@ -1,0 +1,15 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circles at the corners of a tilted square -->
+  <circle cx="50" cy="10" r="10" fill="url(#grad1)" />
+  <circle cx="90" cy="50" r="10" fill="url(#grad1)" />
+  <circle cx="50" cy="90" r="10" fill="url(#grad1)" />
+  <circle cx="10" cy="50" r="10" fill="url(#grad1)" />
+
+  <!-- Background Gradient Definition -->
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgb(72,163,255);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgb(3,80,150);stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project E. | <%= user.name %></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom class to set the width of the parent div */
+        .posts-width {
+            width: calc(3 * 18rem + 1rem);
+        }
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body class="bg-zinc-900 text-white flex flex-col items-center w-full pl-10 pr-10 pb-10">
+    <div class="header flex flex-row justify-between items-center w-full mb-4 border-b border-gray-700 pb-4 pt-4 bg-zinc-900">
+        <div id="header" class="flex flex-row justify-center items-center">
+            <img src="/images/Binora Pre 1.svg" alt="Binora Pre" class="w-10 h-10 mr-4">
+            <h1 class="text-4xl font-bold">Binora Pre</h1>
+        </div>
+        <div class="logout flex flex-row justify-center items-center">
+            <a href="/binora" class="text-white text-sm bg-green-700 hover:bg-green-600 px-3 py-2 rounded">Messages</a>
+            <a href="/createpost" class="flex flex-col items-center text-sm">
+                <p class="m-1 px-3 py-2 bg-white rounded font-semibold text-blue-600 hover:text-blue-700">+ Create</p>
+            </a>
+            <a href="/logout" class="bg-blue-800 px-3 py-2 flex justify-center items-center rounded text-sm hover:bg-blue-900">Logout</a>
+        </div>
+    </div>
+    <div class="profile-top flex flex-row justify-center">
+        <div class="profile-image bg-zinc-700 w-44 h-44 rounded-full p-10 mb-7"></div>
+        <div class="details h-44 w-72 flex flex-col items-center m-4">
+            <h3 class="name"><%= user.name %></h3>
+            <h3 class="username">@<%= user.username %></h3>
+            <!-- <h3 class="posts"></h3> -->
+        </div>
+    </div>
+    <div class="posts posts-width h-full gap-2 flex flex-row flex-wrap ml-10 mr-10">
+        <% if (user.posts.length === 0) { %>
+            <div class="each-post w-72 h-72 p-2 bg-zinc-700 flex flex-col items-center justify-center">
+                <a href="/createpost" class="text-blue-400  flex flex-col items-center">
+                    <img class="p-2" src="/images/Binora Pre 1.svg">
+                    <p class="hover:underline">Create a new post</p>
+                </a>
+            </div>
+        <% } else { %>
+            <% user.posts.reverse().forEach(posts => { // reverse isliye taaki naye post ooper aa sakein %> 
+                <div class="each-post w-72 h-72 p-2 bg-zinc-700 flex flex-col items-center justify-center">
+                    <p class="text-sm tracking tight"><%= posts.content %></p>
+                    <div class="options">
+                        <a href="" class="like">Like</a>
+                        <a href="" class="edit">edit</a>
+                    </div>
+                </div>
+            <% }); %>
+        <% } %>        
+    </div>
+</body>
+</html>
