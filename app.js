@@ -8,6 +8,8 @@ const cookieParser = require('cookie-parser')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const path = require('path');
+// multeconfig import kr rhe hain
+const multeconfig = require('./configs/multerconfig');
 
 app.set('view engine', 'ejs');
 app.use(express.json());
@@ -102,5 +104,9 @@ app.post('/createpost', isLoggedIn, async (req, res) => {
     await user.posts.push(post._id);
     await user.save();
     res.redirect('/p')
+})
+
+app.get('/editp', isLoggedIn, (req, res) => {
+    res.render('editprofile')
 })
 app.listen(3000, () => console.log('server running on 3000'));

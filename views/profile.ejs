@@ -26,18 +26,19 @@
             <img src="/images/Binora Pre 1.svg" alt="Binora Pre" class="w-10 h-10 mr-4">
             <h1 class="text-4xl font-bold">Binora Pre</h1>
         </a>
-        <div class="logout flex flex-row justify-center items-center">
+        <div class="logout flex flex-row justify-center items-center gap-1">
             <a href="/binora" class="text-white text-sm bg-green-700 hover:bg-green-600 px-3 py-2 rounded">Messages</a>
             <a href="/createpost" class="flex flex-col items-center text-sm">
-                <p class="m-1 px-3 py-2 bg-white rounded font-semibold text-blue-600 hover:text-blue-700">+ Create</p>
+                <p class="px-3 py-2 bg-white rounded font-semibold text-blue-600 hover:text-blue-700">+ Create</p>
             </a>
+            <a href="/editp" class="px-3 py-2 bg-blue-500 hover:bg-blue-600 rounded text-sm text-white">Edit</a>
             <a href="/logout" class="bg-blue-800 px-3 py-2 flex justify-center items-center rounded text-sm hover:bg-blue-900">Logout</a>
         </div>
     </div>
     <div class="head flex flex-row items-center justify-center posts-width gap-2 mb-4">
         <div class="profile-top flex flex-row justify-center posts-width2 p-2 rounded-lg">
-            <div class="profile-image bg-zinc-700 w-20 h-20 rounded-full p-10">
-
+            <div class="profile-image w-20 h-20 rounded-full p-10 oveflow-hidden">
+                <img src="public/images/uploads/default.jpg" alt="profile-image" class="w-full h-full object-cover">
             </div>
             <div class="details h-20 flex flex-col justify-center ml-10">
                 <h3 class="name font-bold"><%= user.name %></h3>
