@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { type } = require('os');
 
 mongoose.connect(`mongodb://127.0.0.1:27017/BinoraPre`);
 
@@ -13,6 +12,7 @@ const userSchema = mongoose.Schema({
         type: String,
         default: 'default.jpg'
     },
+    about: String,
     posts: [
         {
             type: mongoose.Schema.Types.ObjectId,

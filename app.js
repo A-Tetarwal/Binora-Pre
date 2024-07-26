@@ -9,7 +9,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 // multeconfig import kr rhe hain
-const multeconfig = require('./configs/multerconfig');
+const upload = require('./configs/multerconfig');
 
 app.set('view engine', 'ejs');
 app.use(express.json());
@@ -106,7 +106,19 @@ app.post('/createpost', isLoggedIn, async (req, res) => {
     res.redirect('/p')
 })
 
-app.get('/editp', isLoggedIn, (req, res) => {
-    res.render('editprofile')
+app.get('/editp', isLoggedIn, async (req, res) => {
+    let user = await userModel.findOne({email: req.user.email});
+    res.render('editprofile', {user})
 })
+
+app.post('/editp', isLoggedIn, upload.single('image'), async (req, res) => {
+    let user = await userModel.findOne({ email: req.user.email });
+    user.about = req.body.about; // update the user's about field
+    if(req.file){
+        user.profilepic = req.file.filename;
+    }
+    await user.save(); // save the changes
+    res.redirect('/p');
+})
+
 app.listen(3000, () => console.log('server running on 3000'));
