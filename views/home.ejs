@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Binora Pre</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-900 text-white flex flex-col items-center w-full pl-10 pr-10 pb-10">
+    <div class="header flex flex-row justify-between items-center w-full mb-4 border-b border-zinc-700 pb-4 pt-4 bg-zinc-900">
+        <a id="header" class="flex flex-row justify-center items-center hover:none" href="/home">
+            <img src="/images/Binora Pre 1.svg" alt="Binora Pre" class="w-10 h-10 mr-4">
+            <h1 class="text-4xl font-bold">Binora Pre</h1>
+        </a>
+        <div class="logout flex flex-row justify-center items-center gap-4">
+            <div class="options flex flex-row gap-1 px-3 rounded-lg bg-zinc-800">
+                <a href="/binora" class="flex flex-row items-center">
+                    <img src="/images/message.svg" alt="messages" class="w-6 h-7">
+                </a>
+                <a href="/createpost" class="flex flex-row items-center">
+                    <img src="/images/createpost.svg" alt="create post" class="object-cover h-14 w-7">
+                </a>
+            </div>
+            <a href="/p" class="flex flex-row items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800">
+                <img src="/images/uploads/<%= user.profilepic ? user.profilepic : 'default.jpg' %>" alt="profile-image" class="object-cover h-10 w-10 rounded-full">
+            </a>
+        </div>        
+    </div>
+    <div class="posts flex flex-col gap-4 w-full">
+        <% posts.forEach(post => { %>
+            <div class="post bg-zinc-700 p-4 rounded-lg">
+                <p class="text-sm"><%= post.content %></p>
+                <p class="text-xs text-zinc-400">by <a href="" class="text-blue-500"><%= post.user.name %></a> on <%= new Date(post.date).toLocaleString() %></p>
+            </div>
+        <% }); %>
+    </div>
+</body>
+</html>

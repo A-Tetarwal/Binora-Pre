@@ -56,7 +56,7 @@ app.post('/login', async (req, res) => {
             let token = jwt.sign({ email: email, userid: user._id }, 'securekey')
             res.cookie("token", token);
             // res.status(200).send('you can login');
-            res.redirect(`/p`)
+            res.redirect(`/home`)
         }
         else res.redirect('/login')
     })
@@ -120,5 +120,12 @@ app.post('/editp', isLoggedIn, upload.single('image'), async (req, res) => {
     await user.save(); // save the changes
     res.redirect('/p');
 })
+
+app.get('/home', isLoggedIn, async (req, res) => {
+    const user = await userModel.findOne({email: req.user.email})
+    const posts = await postModel.find().sort({ date: -1 }).populate('user'); // Assuming you have an user field
+    res.render('home', { posts, user });
+});
+
 
 app.listen(3000, () => console.log('server running on 3000'));

@@ -26,6 +26,26 @@
         .each-post {
             min-height: 10rem;
         }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #1a1a1a; /* Same as bg-zinc-900 */
+            border: 1px solid #2d2d2d; /* Same as border-zinc-700 */
+            border-radius: 0.375rem; /* Same as rounded */
+            padding: 0.5rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #fff;
+            text-decoration: none;
+        }
+        .dropdown-menu a:hover {
+            background-color: #2d2d2d; /* Same as hover:bg-zinc-700 */
+        }
     </style>
 </head>
 <body class="bg-zinc-900 text-white flex flex-col items-center w-full px-10 pb-10 gap-2">
@@ -35,12 +55,28 @@
             <h1 class="text-4xl font-bold">Binora Pre</h1>
         </a>
         <div class="logout flex flex-row justify-center items-center gap-1">
-            <a href="/binora" class="text-white text-sm bg-green-700 hover:bg-green-600 px-3 py-2 rounded">Messages</a>
-            <a href="/createpost" class="flex flex-col items-center text-sm">
-                <p class="px-3 py-2 bg-transparent rounded border border-zinc-700 font-semibold text-blue-600 hover:text-blue-500 hover:bg-zinc-700">+ Create</p>
-            </a>
-            <a href="/editp" class="px-3 py-2 bg-blue-500 hover:bg-blue-600 rounded text-sm text-white">Edit</a>
-            <a href="/logout" class="bg-blue-800 px-3 py-2 flex justify-center items-center rounded text-sm hover:bg-blue-900">Logout</a>
+            <div class="home flex flex-row gap-1 px-3 py-4 rounded-lg bg-zinc-800">
+                <a href="/home" class="flex flex-row items-center">
+                    <img src="/images/home.svg" alt="Home" class="w-6 h-6">
+                </a>
+            </div>
+            <div class="options flex flex-row gap-1 px-3 rounded-lg bg-zinc-800">
+                <a href="/binora" class="flex flex-row items-center">
+                    <img src="/images/message.svg" alt="messages" class="w-6 h-7">
+                </a>
+                <a href="/createpost" class="flex flex-row items-center">
+                    <img src="/images/createpost.svg" alt="create post" class="object-cover h-14 w-7">
+                </a>
+            </div>
+            <div class="relative">
+                <button id="dropdownButton" class="text-gray-500 hover:text-white focus:outline-none flex">
+                    <img src="/images/threedot.svg" alt="Menu" class="h-6 w-6">
+                </button>
+                <div id="dropdownMenu" class="dropdown-menu">
+                    <a href="/editp">Edit</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="head flex flex-row items-center justify-center posts-width gap-2 mb-4">
@@ -91,5 +127,19 @@
             <% }); %>
         <% } %>      
     </div>
+    <!-- script -->
+    <script>
+        document.getElementById('dropdownButton').addEventListener('click', function() {
+            var dropdownMenu = document.getElementById('dropdownMenu');
+            dropdownMenu.style.display = dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '' ? 'block' : 'none';
+        });
+
+        window.addEventListener('click', function(event) {
+            if (!event.target.matches('#dropdownButton') && !event.target.closest('.relative')) {
+                var dropdownMenu = document.getElementById('dropdownMenu');
+                dropdownMenu.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
