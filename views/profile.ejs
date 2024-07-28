@@ -50,7 +50,7 @@
 </head>
 <body class="bg-zinc-900 text-white flex flex-col items-center w-full px-10 pb-10 gap-2">
     <div class="header flex flex-row justify-between items-center w-full mb-4 border-b border-zinc-700 pb-4 pt-4 bg-zinc-900">
-        <a id="header" class="flex flex-row justify-center items-center hover:none" href="/p">
+        <a id="header" class="flex flex-row justify-center items-center hover:none" href="/p/<%= user.username %>">
             <img src="/images/Binora Pre 1.svg" alt="Binora Pre" class="w-10 h-10 mr-4">
             <h1 class="text-4xl font-bold">Binora Pre</h1>
         </a>
@@ -117,7 +117,7 @@
                     <p class="text-sm tracking-tight mb-2"><%= post.content %></p>
                     <div class="border-b border-zinc-700 my-2"></div>
                     <div class="text-zinc-500 text-xs mb-2">
-                        by @<%= user.username %> on <%= post.date.toLocaleDateString() %>
+                        <%= user.name %> . <%= post.date.toLocaleDateString() %>
                     </div>
                     <div class="options flex justify-between text-xs">
                         <a href="" class="like text-blue-400 hover:underline">Like</a>

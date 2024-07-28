@@ -41,7 +41,7 @@ app.post('/register', async (req, res) => {
             let token = jwt.sign({ email: email, userid: user._id }, 'securekey')
             res.cookie("token", token);
             // res.send('User registered');
-            res.redirect('/p')
+            res.redirect(`/p/${user.username}`)
         })
     })
 })
@@ -78,16 +78,11 @@ function isLoggedIn(req, res, next) {
     }
 }
 
-app.get('/p', isLoggedIn, async (req, res) => {
-    // let user = await userModel.findOne({ email: req.user.email });
-    // let posts = await postModel.find({ _id: { $in: user.posts } }); // Manually finding posts by their IDs
-    // res.render('profile', { user, posts }); // Passing both user and posts to the template
-
-
-    // upar do baar na karke hum aise bhi kr skte hai populate use karke
-    let user = await userModel.findOne({email: req.user.email}).populate("posts");
-
-    res.render('profile', {user}); // profile ejs pe humne user ko send kr diya hai, agar ooper wale tarike se post find kiya hai to post bhi bhejna hota profile ejs mein
+app.get('/p/:username', isLoggedIn, async (req, res) => {
+    let username = req.params.username;
+    // Now you can use the username to find the user and their posts
+    let user = await userModel.findOne({ username: username }).populate("posts");
+    res.render('profile', { user });
 })
 
 app.get('/createpost', isLoggedIn, async (req, res) => {
@@ -103,7 +98,7 @@ app.post('/createpost', isLoggedIn, async (req, res) => {
 
     await user.posts.push(post._id);
     await user.save();
-    res.redirect('/p')
+    res.redirect(`/p/${user.username}`)
 })
 
 app.get('/editp', isLoggedIn, async (req, res) => {
@@ -118,7 +113,7 @@ app.post('/editp', isLoggedIn, upload.single('image'), async (req, res) => {
         user.profilepic = req.file.filename;
     }
     await user.save(); // save the changes
-    res.redirect('/p');
+    res.redirect(`/p/${user.username}`)
 })
 
 app.get('/home', isLoggedIn, async (req, res) => {

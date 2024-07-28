@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | Binora Pre</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+    </style>
 </head>
 <body class="bg-zinc-900 text-white flex flex-col items-center w-full pl-10 pr-10 pb-10">
     <div class="header flex flex-row justify-between items-center w-full mb-4 border-b border-zinc-700 pb-4 pt-4 bg-zinc-900">
@@ -21,7 +28,7 @@
                     <img src="/images/createpost.svg" alt="create post" class="object-cover h-14 w-7">
                 </a>
             </div>
-            <a href="/p" class="flex flex-row items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800">
+            <a href="/p/<%= user.username %>" class="flex flex-row items-center gap-2 px-2 py-2 rounded-full bg-zinc-800 border border-zinc-700">
                 <img src="/images/uploads/<%= user.profilepic ? user.profilepic : 'default.jpg' %>" alt="profile-image" class="object-cover h-10 w-10 rounded-full">
             </a>
         </div>        
@@ -30,7 +37,7 @@
         <% posts.forEach(post => { %>
             <div class="post bg-zinc-700 p-4 rounded-lg">
                 <p class="text-sm"><%= post.content %></p>
-                <p class="text-xs text-zinc-400">by <a href="" class="text-blue-500"><%= post.user.name %></a> on <%= new Date(post.date).toLocaleString() %></p>
+                <p class="text-xs text-zinc-400"><a href="/p/<%= post.user.username %>" class="text-blue-500"><%= post.user.name %></a> on <%= new Date(post.date).toLocaleString() %></p>
             </div>
         <% }); %>
     </div>
